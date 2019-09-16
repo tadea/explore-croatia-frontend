@@ -1,4 +1,6 @@
 import { resetLoginForm } from "./loginForm.js";
+import { getFavBeaches } from "./favBeaches.js";
+
 // synchronous action creators
 export const setCurrentUser = user => {
   return {
@@ -25,11 +27,12 @@ export const login = credentials => {
       body: JSON.stringify(credentials)
     })
       .then(r => r.json())
-      .then(user => {
-        if (user.error) {
-          alert(user.error);
+      .then(response => {
+        if (response.error) {
+          alert(response.error);
         } else {
-          dispatch(setCurrentUser(user));
+          dispatch(setCurrentUser(response.data));
+          dispatch(getFavBeaches());
           dispatch(resetLoginForm());
         }
       })
@@ -48,7 +51,7 @@ export const logout = () => {
 };
 
 export const getCurrentUser = () => {
-  console.log("Dispatching current user");
+  console.log("Dispatching get current user");
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/get_current_user", {
       credentials: "include",
@@ -58,11 +61,12 @@ export const getCurrentUser = () => {
       }
     })
       .then(r => r.json())
-      .then(user => {
-        if (user.error) {
-          alert(user.error);
+      .then(response => {
+        if (response.error) {
+          alert(response.error);
         } else {
-          dispatch(setCurrentUser(user));
+          dispatch(setCurrentUser(response.data));
+          dispatch(getFavBeaches()); //check video #5 for this!
         }
       })
       .catch(console.log);
