@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => (
   <div>
     <span>
+      <div>Explore Croatia</div>
       <Link to="/signup">Sign Up</Link> or <Link to="/login">Log In</Link>
     </span>
   </div>
