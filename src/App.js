@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./actions/currentUser.js";
 import NavBar from "./components/NavBar.js";
+import Home from "./components/Home.js";
 import Login from "./components/Login.js";
-import Signup from "./components/Signup.js";
 import Logout from "./components/Logout.js";
+import Signup from "./components/Signup.js";
 import FavBeaches from "./components/FavBeaches.js";
 //import MainContainer from "./components/MainContainer.js";
-import { Route } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,19 +16,38 @@ class App extends React.Component {
   }
 
   render() {
+    const { loggedIn } = this.props;
     return (
       <div>
-        <NavBar />
+        {loggedIn ? <Logout /> : null}
+        <Route
+          exact
+          path="/signup"
+          render={({ history }) => <Signup history={history} />}
+        />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/fav-beaches" component={FavBeaches} />
+        <Route
+          exact
+          path="/"
+          render={props =>
+            loggedIn ? <FavBeaches {...props} /> : <Home {...props} />
+          }
+        />
+        <Route exact path="/trips" component={FavBeaches} />
       </div>
     );
   }
 }
 
-export default connect(
-  null,
-  { getCurrentUser }
-)(App);
+const mapStateToProps = state => {
+  return {
+    loggedIn: !!state.currentUser
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getCurrentUser }
+  )(App)
+);
