@@ -6,7 +6,7 @@ import Login from "./components/Login.js";
 import Signup from "./components/Signup.js";
 import Logout from "./components/Logout.js";
 import FavBeaches from "./components/FavBeaches.js";
-import MainContainer from "./components/MainContainer.js";
+//import MainContainer from "./components/MainContainer.js";
 import { Route } from "react-router-dom";
 
 class App extends React.Component {
