@@ -4,6 +4,7 @@ import currentUser from "./reducers/currentUser.js";
 import loginForm from "./reducers/loginForm.js";
 import signupForm from "./reducers/signupForm.js";
 import favBeaches from "./reducers/favBeaches.js";
+import newBeachForm from "./reducers/newBeachForm.js";
 import thunk from "redux-thunk";
 
 const reducer = combineReducers({
@@ -11,7 +12,8 @@ const reducer = combineReducers({
   currentUser,
   loginForm,
   favBeaches,
-  signupForm
+  signupForm,
+  newBeachForm
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

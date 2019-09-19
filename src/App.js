@@ -7,6 +7,7 @@ import Login from "./components/Login.js";
 import Logout from "./components/Logout.js";
 import Signup from "./components/Signup.js";
 import FavBeaches from "./components/FavBeaches.js";
+import NewBeachForm from "./components/NewBeachForm.js";
 //import MainContainer from "./components/MainContainer.js";
 import { Route, Switch, withRouter } from "react-router-dom";
 
@@ -33,7 +34,8 @@ class App extends React.Component {
             loggedIn ? <FavBeaches {...props} /> : <Home {...props} />
           }
         />
-        <Route exact path="/trips" component={FavBeaches} />
+        <Route exact path="/beaches" component={FavBeaches} />
+        <Route exact path="/beaches/new" component={NewBeachForm} />
       </div>
     );
   }
